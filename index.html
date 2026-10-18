@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>THE DHIMAHI ARCHIVES // VOL. 2026</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Instrument Serif, Space Mono, Plus Jakarta Sans, Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'serif'],
+            mono: ['"Space Mono"', 'monospace'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            hand: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            desk: '#F6F3EC',
+            espresso: '#181615',
+            cherry: '#D92B4B',
+            butter: '#F4E06D',
+            cobalt: '#1F4BFF',
+            receipt: '#FAF8F5',
+            olive: '#2A3B2C',
+          },
+          boxShadow: {
+            'brutal': '4px 4px 0px 0px #181615',
+            'brutal-lg': '8px 8px 0px 0px #181615',
+            'brutal-sm': '2px 2px 0px 0px #181615',
+            'strip': '0 20px 45px -10px rgba(24, 22, 21, 0.32), 0 4px 12px rgba(24, 22, 21, 0.12)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Tactile Desk Dot Grid */
+    body {
+      background-color: #F6F3EC;
+      background-image: radial-gradient(#181615 1.15px, transparent 1.15px);
+      background-size: 24px 24px;
+      color: #181615;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Subtle Film Grain Overlay */
+    .film-grain {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E");
+    }
+
+    /* 3D Flip Utilities for Life4Cuts Strip */
+    .perspective-1200 {
+      perspective: 1400px;
+    }
+    .preserve-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Serrated Thermal Paper Edges */
+    .serrated-top {
+      background-image: linear-gradient(135deg, #FAF8F5 50%, transparent 50%), linear-gradient(225deg, #FAF8F5 50%, transparent 50%);
+      background-position: top left, top left;
+      background-size: 16px 16px;
+      background-repeat: repeat-x;
+    }
+    .serrated-bottom {
+      background-image: linear-gradient(45deg, transparent 50%, #FAF8F5 50%), linear-gradient(315deg, transparent 50%, #FAF8F5 50%);
+      background-position: bottom left, bottom left;
+      background-size: 16px 16px;
+      background-repeat: repeat-x;
+    }
+
+    /* Printer Slot Dispense Animation */
+    @keyframes printSlide {
+      0% {
+        transform: translateY(-92%);
+        opacity: 0.7;
+      }
+      25% {
+        transform: translateY(-68%);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-42%);
+      }
+      75% {
+        transform: translateY(-18%);
+      }
+      100% {
+        transform: translateY(0%);
+      }
+    }
+    .animate-print {
+      animation: printSlide 1.85s steps(12, end) forwards;
+    }
+
+    /* Camera Flash */
+    @keyframes flashBang {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .flash-active {
+      animation: flashBang 0.75s ease-out forwards;
+    }
+
+    /* Spinning Vinyl */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-vinyl {
+      animation: spinSlow 6s linear infinite;
+    }
+    .spin-paused {
+      animation-play-state: paused;
+    }
+
+    /* Draggable Sticker Cursor */
+    .draggable-sticker {
+      touch-action: none;
+      user-select: none;
+      cursor: grab;
+    }
+    .draggable-sticker:active {
+      cursor: grabbing;
+      transform: scale(1.08);
+    }
+
+    /* Paper Crinkle Subtle Gradient */
+    .thermal-texture {
+      background: linear-gradient(180deg, #FAF8F5 0%, #F3EFEA 45%, #FAF8F5 70%, #F1EDE6 100%);
+    }
+
+    /* Locked Navbar Shake Animation */
+    @keyframes lockShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px) rotate(-1deg); }
+      40%, 80% { transform: translateX(5px) rotate(1deg); }
+    }
+    .animate-shake {
+      animation: lockShake 0.4s ease-in-out;
+    }
+
+    /* Equalizer Bounce Bars */
+    @keyframes eqBounce {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+    .eq-bar {
+      animation: eqBounce 0.35s ease-in-out infinite;
+    }
+
+    /* Hide Scrollbars for Clean Story Look */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-cherry selection:text-white">
+
+  <!-- Full Viewport SVG Film Grain Overlay -->
+  <div class="fixed inset-0 pointer-events-none z-50 film-grain"></div>
+
+  <!-- Camera Flash Overlay -->
+  <div id="cameraFlash" class="fixed inset-0 bg-white pointer-events-none z-50 opacity-0"></div>
+
+  <!-- =====================================================
+       TOP FLOATING EDITORIAL NAVIGATION & PHOTO LOADER
+  ====================================================== -->
+  <header class="sticky top-0 z-40 px-3 sm:px-6 pt-3 pb-2">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-2 bg-desk/95 backdrop-blur-md border-2 border-espresso px-3 py-2 shadow-brutal">
+      
+      <!-- Brand Stamp -->
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-3 h-3 bg-cherry border border-espresso rounded-full animate-pulse"></span>
+        <span class="font-mono text-xs sm:text-sm font-bold tracking-tight uppercase">DHIMAHI // ARCHIVE '26</span>
+      </div>
+
+      <!-- 3-Chapter Progressive Story-Gated Switcher -->
+      <nav class="flex items-center bg-white border-2 border-espresso p-0.5 gap-0.5 order-3 sm:order-2 w-full sm:w-auto justify-between sm:justify-start">
+        <button onclick="attemptChapterSwitch(1)" id="navCh1" class="flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all bg-espresso text-butter">
+          01. WRAPPED
+        </button>
+        <button onclick="attemptChapterSwitch(2)" id="navCh2" class="flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all text-espresso/45 bg-stone-100 cursor-not-allowed flex items-center justify-center gap-1" title="Finish 01. WRAPPED to unlock!">
+          <span id="lockIconCh2">🔒</span>
+          <span>02. LIFE4CUTS</span>
+        </button>
+        <button onclick="attemptChapterSwitch(3)" id="navCh3" class="flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all text-espresso/45 bg-stone-100 cursor-not-allowed flex items-center justify-center gap-1" title="Visit 02. LIFE4CUTS first to unlock!">
+          <span id="lockIconCh3">🔒</span>
+          <span>03. RECEIPT</span>
+        </button>
+      </nav>
+
+      <!-- Utility Controls: Photo Drawer & Audio Toggle -->
+      <div class="flex items-center gap-1.5 order-2 sm:order-3">
+        <button onclick="togglePhotoDrawer()" class="px-2.5 py-1 bg-butter border-2 border-espresso font-mono text-[11px] font-bold uppercase shadow-brutal-sm hover:bg-cherry hover:text-white transition-colors flex items-center gap-1" title="Load or customize photos so zero broken images appear">
+          <span>📸</span>
+          <span class="hidden md:inline">Photos</span>
+          <span id="photoStatusBadge" class="w-2 h-2 rounded-full bg-cherry"></span>
+        </button>
+
+        <button onclick="toggleMute()" id="muteBtn" class="px-2.5 py-1 bg-white border-2 border-espresso font-mono text-[11px] font-bold uppercase shadow-brutal-sm hover:bg-espresso hover:text-white transition-colors">
+          🔊 SFX
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       MAIN CONTENT STAGE
+  ====================================================== -->
+  <main class="flex-1 flex flex-col items-center justify-center px-3 sm:px-6 py-4 sm:py-8 relative z-10">
+
+    <!-- ===================================================
+         CHAPTER 01: 2026 FRIENDSHIP WRAPPED (9:16 STORY)
+    ==================================================== -->
+    <section id="chapter1" class="w-full max-w-[430px] mx-auto flex flex-col items-center">
+      
+      <!-- 9:16 Story Frame -->
+      <div class="w-full min-h-[640px] sm:h-[720px] bg-espresso border-4 border-espresso shadow-brutal-lg relative flex flex-col justify-between overflow-hidden select-none">
+        
+        <!-- Top Story Progress Bars -->
+        <div class="relative z-30 pt-3 px-3 space-y-2">
+          <div class="grid grid-cols-5 gap-1.5" id="storyProgressContainer">
+            <div class="h-1 bg-white/25 overflow-hidden"><div id="prog-0" class="h-full bg-butter w-full transition-all duration-300"></div></div>
+            <div class="h-1 bg-white/25 overflow-hidden"><div id="prog-1" class="h-full bg-butter w-0 transition-all duration-300"></div></div>
+            <div class="h-1 bg-white/25 overflow-hidden"><div id="prog-2" class="h-full bg-butter w-0 transition-all duration-300"></div></div>
+            <div class="h-1 bg-white/25 overflow-hidden"><div id="prog-3" class="h-full bg-butter w-0 transition-all duration-300"></div></div>
+            <div class="h-1 bg-white/25 overflow-hidden"><div id="prog-4" class="h-full bg-butter w-0 transition-all duration-300"></div></div>
+          </div>
+
+          <!-- Story Meta Header -->
+          <div class="flex items-center justify-between text-desk font-mono text-[11px] pt-1">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 bg-cherry text-white font-bold uppercase">WRAPPED '26</span>
+              <span id="storySlideCounter">01 / 05</span>
+            </div>
+            <button onclick="event.stopPropagation(); triggerEditorialConfetti()" class="underline hover:text-butter">@dhimahi.bday</button>
+          </div>
+        </div>
+
+        <!-- Tap Zones for Left / Right Story Navigation -->
+        <div onclick="prevStorySlide()" class="absolute inset-y-16 left-0 w-1/4 z-20 cursor-pointer" title="Previous Slide"></div>
+        <div onclick="nextStorySlide()" class="absolute inset-y-16 right-0 w-1/4 z-20 cursor-pointer" title="Next Slide"></div>
+
+        <!-- SLIDE 0: THE EDITORIAL COVER -->
+        <div id="story-slide-0" class="story-slide flex-1 flex flex-col justify-between p-6 bg-[#181615] text-desk relative">
+          <div class="mt-4">
+            <div class="inline-block border border-butter/60 text-butter font-mono text-[10px] uppercase px-2 py-0.5 mb-3">
+              SPECIAL EDITION // COLLEAGUE & BESTIE
+            </div>
+            <h1 class="font-serif italic text-6xl sm:text-7xl leading-[0.9] tracking-tight text-desk">
+              The <br/>
+              <span class="text-butter not-italic font-normal">Dhimahi</span> <br/>
+              Issue.
+            </h1>
+            <p class="font-mono text-xs text-desk/75 mt-4 leading-relaxed">
+              [WARNING]: Contains 100% unfiltered desk reactions, elite side-eye, and the undisputed MVP of our office floor.
+            </p>
+          </div>
+
+          <!-- Center Editorial Cutout Frame -->
+          <div class="my-4 relative mx-auto w-56 h-60 border-2 border-desk bg-stone-900 shadow-[6px_6px_0px_#D92B4B] rotate-[-2deg] overflow-hidden group">
+            <div id="coverPhotoSlot" class="w-full h-full"></div>
+            <div class="absolute bottom-0 inset-x-0 bg-espresso/90 border-t border-desk px-2.5 py-1 flex justify-between items-center font-mono text-[10px]">
+              <span>FIG 01. THE LEGEND</span>
+              <span class="text-butter">★ 11/10</span>
+            </div>
+          </div>
+
+          <!-- Interactive Stamp Button -->
+          <div class="relative z-30 flex items-center justify-between border-t border-desk/20 pt-4">
+            <button onclick="event.stopPropagation(); stampCover()" id="coverStampBtn" class="px-3 py-1.5 bg-cherry text-white font-mono text-xs font-bold uppercase border border-desk shadow-[3px_3px_0px_#F4E06D] active:translate-y-0.5">
+              🔖 STAMP APPROVAL
+            </button>
+            <span class="font-mono text-[11px] text-butter animate-pulse">TAP RIGHT →</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 1: BY THE NUMBERS (KINETIC DATA) -->
+        <div id="story-slide-1" class="story-slide hidden flex-1 flex flex-col justify-between p-6 bg-butter text-espresso relative">
+          <div>
+            <span class="font-mono text-[11px] font-bold uppercase bg-espresso text-butter px-2 py-0.5">DATA AUDIT // 2025–2026</span>
+            <h2 class="font-serif italic text-5xl leading-none mt-3 text-espresso">
+              Office Survival <br/><span class="not-italic underline decoration-cherry decoration-4">Metrics.</span>
+            </h2>
+          </div>
+
+          <div class="space-y-3 my-auto relative z-30">
+            <!-- Stat Card 1 -->
+            <div class="bg-desk border-2 border-espresso p-3.5 shadow-brutal transform -rotate-1">
+              <div class="flex justify-between items-baseline">
+                <span class="font-serif italic text-4xl sm:text-5xl font-bold text-cherry">1,000+</span>
+                <span class="font-mono text-[10px] uppercase bg-butter border border-espresso px-1.5 py-0.5 font-bold">VERIFIED</span>
+              </div>
+              <p class="font-mono text-xs font-bold uppercase mt-1">Hours Survived Together</p>
+              <p class="font-sans text-xs text-espresso/75 mt-0.5">At adjacent desks, powered purely by chaotic energy & mutual telepathy.</p>
+            </div>
+
+            <!-- Stat Card 2 -->
+            <div class="bg-desk border-2 border-espresso p-3.5 shadow-brutal transform rotate-1">
+              <div class="flex justify-between items-baseline">
+                <span class="font-serif italic text-4xl sm:text-5xl font-bold text-cobalt">99.8%</span>
+                <span class="font-mono text-[10px] uppercase bg-cherry text-white px-1.5 py-0.5 font-bold">CRITICAL</span>
+              </div>
+              <p class="font-mono text-xs font-bold uppercase mt-1">Serious Calls Derailed By Side-Eye</p>
+              <p class="font-sans text-xs text-espresso/75 mt-0.5">Trying not to laugh on camera is an Olympic sport.</p>
+            </div>
+
+            <!-- Stat Card 3 -->
+            <div class="bg-espresso text-desk border-2 border-espresso p-3.5 shadow-[4px_4px_0px_#D92B4B]">
+              <div class="flex justify-between items-baseline">
+                <span class="font-serif italic text-4xl sm:text-5xl text-butter">∞ / 10</span>
+                <span class="font-mono text-[10px] uppercase text-butter">TOP 0.01%</span>
+              </div>
+              <p class="font-mono text-xs font-bold uppercase mt-1">Unfiltered Facial Expressions</p>
+              <p class="font-sans text-xs text-desk/75 mt-0.5">Subtitles are never required when Dhimahi is in the room.</p>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center font-mono text-[11px] font-bold border-t-2 border-espresso pt-3">
+            <span>SOURCE: DESK CCTV</span>
+            <span>TAP TO CONTINUE →</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: TOP MOOD ARCHETYPES (INTERACTIVE SWITCHER) -->
+        <div id="story-slide-2" class="story-slide hidden flex-1 flex flex-col justify-between p-6 bg-desk text-espresso relative">
+          <div>
+            <span class="font-mono text-[10px] font-bold uppercase bg-cobalt text-white px-2 py-0.5">PERSONA ANALYSIS</span>
+            <h2 class="font-serif italic text-4xl sm:text-5xl leading-none mt-2">
+              The 4 Moods of <span class="text-cherry not-italic">Dhimahi</span>
+            </h2>
+          </div>
+
+          <!-- Active Persona Card -->
+          <div class="my-auto relative z-30">
+            <div class="bg-white border-2 border-espresso p-3 shadow-brutal">
+              <div id="moodPhotoFrame" class="w-full h-44 bg-stone-100 border border-espresso overflow-hidden relative"></div>
+              <div class="mt-2.5">
+                <span id="moodTag" class="font-mono text-[9px] bg-butter px-1.5 py-0.5 border border-espresso uppercase font-bold"></span>
+                <h3 id="moodTitle" class="font-serif italic text-2xl mt-1 leading-tight"></h3>
+                <p id="moodDesc" class="font-sans text-xs text-espresso/80 mt-1"></p>
+              </div>
+            </div>
+
+            <!-- 4 Selector Buttons -->
+            <div class="grid grid-cols-2 gap-2 mt-3">
+              <button onclick="selectMood(0)" id="moodBtn-0" class="px-2.5 py-2 font-mono text-[11px] font-bold uppercase border-2 border-espresso bg-espresso text-butter text-left truncate">
+                01. Tongue Out 🤪
+              </button>
+              <button onclick="selectMood(1)" id="moodBtn-1" class="px-2.5 py-2 font-mono text-[11px] font-bold uppercase border-2 border-espresso bg-white text-espresso hover:bg-butter/40 text-left truncate">
+                02. 5PM Stare ☁️
+              </button>
+              <button onclick="selectMood(2)" id="moodBtn-2" class="px-2.5 py-2 font-mono text-[11px] font-bold uppercase border-2 border-espresso bg-white text-espresso hover:bg-butter/40 text-left truncate">
+                03. Hear Me Out ✋
+              </button>
+              <button onclick="selectMood(3)" id="moodBtn-3" class="px-2.5 py-2 font-mono text-[11px] font-bold uppercase border-2 border-espresso bg-white text-espresso hover:bg-butter/40 text-left truncate">
+                04. Peace Sign ✌️
+              </button>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center font-mono text-[11px] text-espresso/70 border-t border-espresso/20 pt-3">
+            <span>TAP MOOD TO INSPECT</span>
+            <span>NEXT →</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: BOLLYWOOD FRIENDSHIP JUKEBOX & SPOTIFY -->
+        <div id="story-slide-3" class="story-slide hidden flex-1 flex flex-col justify-between p-6 bg-cobalt text-desk relative">
+          <div>
+            <span class="font-mono text-[10px] font-bold uppercase bg-butter text-espresso px-2 py-0.5">SOUNDTRACK ARCHIVE // SPOTIFY CONNECT</span>
+            <h2 class="font-serif italic text-4xl sm:text-5xl leading-none mt-2 text-white">
+              Desk Anthems & <br/><span class="text-butter not-italic">Bollywood Jukebox.</span>
+            </h2>
+          </div>
+
+          <!-- Interactive Spotify Player + 3 Bollywood Anthems -->
+          <div class="my-auto space-y-3 relative z-30" onclick="event.stopPropagation()">
+            
+            <!-- Official Spotify Embed Player Box -->
+            <div class="bg-espresso border-2 border-desk p-2 shadow-[5px_5px_0px_#F4E06D]">
+              <div class="flex items-center justify-between px-1 pb-1">
+                <span id="nowPlayingLabel" class="font-mono text-[9px] text-butter uppercase tracking-wider">● NOW LOADED: JAANE KYUN (DOSTANA)</span>
+                <span class="font-mono text-[9px] bg-cherry text-white px-1">SPOTIFY</span>
+              </div>
+              <div id="spotifyEmbedContainer" class="w-full rounded overflow-hidden bg-black">
+                <iframe id="spotifyIframe" style="border-radius:4px" src="https://open.spotify.com/embed/track/6M2UnI1LnXuXlWU54CKmKx?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              </div>
+            </div>
+
+            <!-- Track Selector List -->
+            <div class="bg-desk text-espresso border-2 border-espresso p-3.5 shadow-brutal space-y-2">
+              <div class="flex items-center justify-between border-b border-espresso/20 pb-1">
+                <span class="font-mono text-[10px] font-bold uppercase text-cherry">TAP A SONG TO LOAD IN SPOTIFY PLAYER:</span>
+                <span class="font-mono text-[9px] bg-butter px-1 border border-espresso font-bold">TOP 3 TRACKS</span>
+              </div>
+
+              <div onclick="switchSpotifyTrack(0)" id="songCard-0" class="cursor-pointer bg-espresso text-butter p-2 border-2 border-espresso shadow-brutal-sm transition-all flex items-center justify-between gap-2">
+                <div>
+                  <div class="font-mono text-[11px] font-bold">01. Jaane Kyun — Dostana</div>
+                  <div class="font-mono text-[9px] text-desk/80">Vishal-Shekhar, Vishal Dadlani — Ultimate Bestie Anthem</div>
+                </div>
+                <span class="px-2 py-1 bg-butter text-espresso font-mono text-[10px] font-bold shrink-0">ACTIVE ▶</span>
+              </div>
+
+              <div onclick="switchSpotifyTrack(1)" id="songCard-1" class="cursor-pointer bg-white hover:bg-butter/60 p-2 border border-espresso shadow-brutal-sm transition-all flex items-center justify-between gap-2">
+                <div>
+                  <div class="font-mono text-[11px] font-bold">02. Iktara — Wake Up Sid</div>
+                  <div class="font-mono text-[9px] text-espresso/70">Amit Trivedi, Kavita Seth — Soulful Desk Vibe</div>
+                </div>
+                <span class="px-2 py-1 bg-espresso text-butter font-mono text-[10px] font-bold shrink-0">PLAY ♫</span>
+              </div>
+
+              <div onclick="switchSpotifyTrack(2)" id="songCard-2" class="cursor-pointer bg-white hover:bg-butter/60 p-2 border border-espresso shadow-brutal-sm transition-all flex items-center justify-between gap-2">
+                <div>
+                  <div class="font-mono text-[11px] font-bold">03. Tumse Milke Dil Ka — Main Hoon Na</div>
+                  <div class="font-mono text-[9px] text-espresso/70">Sonu Nigam, Anu Malik — Classic Bollywood Vibe</div>
+                </div>
+                <span class="px-2 py-1 bg-espresso text-butter font-mono text-[10px] font-bold shrink-0">PLAY ♫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center font-mono text-[11px] text-butter border-t border-white/25 pt-3">
+            <span>PLAY SPOTIFY OR TAP TRACKS</span>
+            <span>FINAL SLIDE →</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: TRANSITION TO PHOTOBOOTH -->
+        <div id="story-slide-4" class="story-slide hidden flex-1 flex flex-col justify-between p-6 bg-cherry text-white relative">
+          <div>
+            <span class="font-mono text-[10px] font-bold uppercase bg-espresso text-butter px-2 py-0.5">CHAPTER 01 COMPLETE</span>
+            <h2 class="font-serif italic text-5xl sm:text-6xl leading-[0.92] mt-3">
+              Now Let's <br/>Print The <br/><span class="text-butter not-italic">Evidence.</span>
+            </h2>
+          </div>
+
+          <!-- Duo Preview Card -->
+          <div class="my-auto relative z-30">
+            <div class="bg-desk text-espresso border-2 border-espresso p-3 shadow-brutal rotate-1">
+              <div id="duoFinaleSlot" class="w-full h-48 bg-stone-200 border border-espresso overflow-hidden"></div>
+              <p class="font-hand text-2xl font-bold text-center mt-2 text-espresso">
+                Best Colleague & Best Friend rolled into one ✨
+              </p>
+            </div>
+
+            <button onclick="event.stopPropagation(); launchPhotoboothFromStory()" class="mt-5 w-full py-4 bg-butter text-espresso font-mono text-sm font-bold uppercase border-2 border-espresso shadow-brutal hover:bg-white active:translate-y-0.5 transition-all flex items-center justify-center gap-2">
+              <span>📸 ENTER LIFE4CUTS BOOTH</span>
+              <span>→</span>
+            </button>
+          </div>
+
+          <div class="flex justify-between items-center font-mono text-[11px] text-white/90 border-t border-white/25 pt-3">
+            <span>HAPPY BIRTHDAY DHIMAHI</span>
+            <span>OCT 2026</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Story Helper Controls -->
+      <div class="mt-4 flex items-center justify-between w-full px-1 font-mono text-xs">
+        <button onclick="prevStorySlide()" class="px-3 py-1.5 bg-white border-2 border-espresso shadow-brutal-sm font-bold hover:bg-butter">
+          ← PREV
+        </button>
+        <span class="text-[11px] text-espresso/70 uppercase">Tap edges or buttons</span>
+        <button onclick="nextStorySlide()" class="px-3 py-1.5 bg-white border-2 border-espresso shadow-brutal-sm font-bold hover:bg-butter">
+          NEXT →
+        </button>
+      </div>
+    </section>
+
+
+    <!-- ===================================================
+         CHAPTER 02: LIFE4CUTS PHOTOBOOTH & STICKER DESK
+    ==================================================== -->
+    <section id="chapter2" class="hidden w-full max-w-5xl mx-auto">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT COLUMN: PHOTOBOOTH DISPENSER CONSOLE & STICKER TRAY (5 cols) -->
+        <div class="lg:col-span-5 space-y-5">
+          
+          <!-- Machine Header Box -->
+          <div class="bg-espresso text-desk border-2 border-espresso p-5 shadow-brutal">
+            <div class="flex items-center justify-between border-b border-desk/20 pb-2 mb-3">
+              <span class="font-mono text-xs text-butter font-bold uppercase">LIFE4CUTS // SEOUL-AHMEDABAD EDITION</span>
+              <span class="px-2 py-0.5 bg-cherry text-white font-mono text-[10px] font-bold">READY</span>
+            </div>
+            <h2 class="font-serif italic text-4xl sm:text-5xl text-white leading-none">
+              Photobooth & <span class="text-butter not-italic">Sticker Desk</span>
+            </h2>
+            <p class="font-mono text-xs text-desk/80 mt-2">
+              Customize Dhimahi's birthday photo strip, hit print for the camera flash, peel stickers onto the desk, and flip the strip to read the back note!
+            </p>
+
+            <!-- 1. Frame Color Picker -->
+            <div class="mt-5">
+              <label class="block font-mono text-[11px] uppercase text-butter mb-2">01. Select Strip Frame Color:</label>
+              <div class="grid grid-cols-4 gap-2">
+                <button onclick="setStripTheme('black')" id="theme-black" class="py-2 px-2 font-mono text-[11px] font-bold uppercase border-2 border-butter bg-[#141413] text-white">
+                  Ink Black
+                </button>
+                <button onclick="setStripTheme('cream')" id="theme-cream" class="py-2 px-2 font-mono text-[11px] font-bold uppercase border-2 border-desk/30 bg-[#F5F0E6] text-espresso">
+                  Cream
+                </button>
+                <button onclick="setStripTheme('cherry')" id="theme-cherry" class="py-2 px-2 font-mono text-[11px] font-bold uppercase border-2 border-desk/30 bg-[#C8233C] text-white">
+                  Cherry
+                </button>
+                <button onclick="setStripTheme('cobalt')" id="theme-cobalt" class="py-2 px-2 font-mono text-[11px] font-bold uppercase border-2 border-desk/30 bg-[#1D3557] text-white">
+                  Cobalt
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Layout Mode Picker -->
+            <div class="mt-4">
+              <label class="block font-mono text-[11px] uppercase text-butter mb-2">02. Select Cut Format:</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="setStripLayout('4cut')" id="layout-4cut" class="py-2 px-3 font-mono text-xs font-bold uppercase border-2 border-butter bg-butter text-espresso">
+                  4-Cut Classic Vertical
+                </button>
+                <button onclick="setStripLayout('6cut')" id="layout-6cut" class="py-2 px-3 font-mono text-xs font-bold uppercase border-2 border-desk/40 bg-transparent text-desk hover:border-butter">
+                  6-Cut Full Archive Grid
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. Big Action Buttons: Print & Flip -->
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <button onclick="dispensePhotoStrip()" class="py-3 px-4 bg-cherry text-white font-mono text-xs font-bold uppercase border-2 border-white shadow-[4px_4px_0px_#F4E06D] hover:bg-cherry/90 active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5">
+                <span>📸 PRINT STRIP</span>
+              </button>
+              <button onclick="flipPhotoStrip()" id="flipStripBtn" class="py-3 px-4 bg-butter text-espresso font-mono text-xs font-bold uppercase border-2 border-white shadow-[4px_4px_0px_#D92B4B] hover:bg-white active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5">
+                <span>🔄 FLIP TO BACK</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Peel & Stick Sticker Book -->
+          <div class="bg-white border-2 border-espresso p-5 shadow-brutal">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-mono text-xs font-bold uppercase text-espresso">03. PEEL & STICK PACK (CLICK TO DROP ON DESK)</span>
+              <button onclick="clearAllStickers()" class="font-mono text-[11px] underline text-cherry hover:text-espresso">Clear</button>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <button onclick="spawnSticker('👑 BIRTHDAY QUEEN', 'bg-butter text-espresso border-2 border-espresso font-mono text-xs font-bold px-2.5 py-1 shadow-brutal-sm rotate-[-4deg]')" class="px-2.5 py-1.5 bg-butter border border-espresso font-mono text-xs font-bold hover:scale-105 transition-transform">
+                + 👑 BIRTHDAY QUEEN
+              </button>
+              <button onclick="spawnSticker('CEO OF SIDE-EYE 👀', 'bg-cherry text-white border-2 border-espresso font-mono text-xs font-bold px-2.5 py-1 shadow-brutal-sm rotate-[3deg]')" class="px-2.5 py-1.5 bg-cherry text-white border border-espresso font-mono text-xs font-bold hover:scale-105 transition-transform">
+                + CEO OF SIDE-EYE 👀
+              </button>
+              <button onclick="spawnSticker('100% CERTIFIED WORK BESTIE', 'bg-cobalt text-white border-2 border-espresso font-mono text-[11px] font-bold px-2.5 py-1 shadow-brutal-sm rotate-[-2deg]')" class="px-2.5 py-1.5 bg-cobalt text-white border border-espresso font-mono text-xs font-bold hover:scale-105 transition-transform">
+                + CERTIFIED BESTIE
+              </button>
+              <button onclick="spawnSticker('☕ CHAI BREAK URGENT', 'bg-desk text-espresso border-2 border-espresso font-mono text-xs font-bold px-2.5 py-1 shadow-brutal-sm rotate-[5deg]')" class="px-2.5 py-1.5 bg-desk border border-espresso font-mono text-xs font-bold hover:scale-105 transition-transform">
+                + ☕ CHAI BREAK
+              </button>
+              <button onclick="spawnSticker('★ ICONIC ★', 'bg-espresso text-butter border-2 border-butter font-mono text-xs font-bold px-3 py-1 rounded-full shadow-brutal-sm')" class="px-2.5 py-1.5 bg-espresso text-butter border border-espresso font-mono text-xs font-bold hover:scale-105 transition-transform">
+                + ★ ICONIC ★
+              </button>
+              <button onclick="spawnSticker('OCT 2026 // ARCHIVE', 'bg-white/90 text-espresso border border-dashed border-espresso font-mono text-[10px] px-2.5 py-1 rotate-[-6deg]')" class="px-2.5 py-1.5 bg-stone-100 border border-espresso font-mono text-xs font-bold hover:scale-105 transition-transform">
+                + 🏷️ DATE TAPE
+              </button>
+              <button onclick="spawnSticker('✨ ZERO FILTER ✨', 'bg-pink-200 text-espresso border-2 border-espresso font-serif italic text-base px-3 py-0.5 shadow-brutal-sm rotate-[4deg]')" class="px-2.5 py-1.5 bg-pink-200 border border-espresso font-mono text-xs font-bold hover:scale-105 transition-transform">
+                + ✨ ZERO FILTER
+              </button>
+            </div>
+            <p class="font-mono text-[11px] text-espresso/60 mt-3">
+              * Tip: Drag any sticker around the photo strip! Double-click a sticker on the desk to remove it.
+            </p>
+          </div>
+
+          <!-- Next Chapter Prompt -->
+          <div class="bg-butter border-2 border-espresso p-4 shadow-brutal flex items-center justify-between">
+            <div>
+              <div class="font-mono text-[10px] font-bold uppercase">FINAL ARTIFACT</div>
+              <div class="font-serif italic text-2xl">Checkout Your Birthday Receipt</div>
+            </div>
+            <button onclick="unlockAndGoToReceipt()" class="px-4 py-2 bg-espresso text-white font-mono text-xs font-bold uppercase hover:bg-cherry transition-colors">
+              03. RECEIPT →
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: DISPENSER SLOT + INTERACTIVE DOT-GRID DESK (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col items-center">
+          
+          <!-- Physical Photobooth Dispenser Slot Bar -->
+          <div class="w-full max-w-md bg-espresso p-3 border-2 border-espresso shadow-brutal z-20 relative">
+            <div class="flex items-center justify-between text-[10px] font-mono text-desk/70 mb-1.5 px-1">
+              <span>DISPENSER SLOT // CAUTION HOT</span>
+              <span id="printerStatusText" class="text-butter">● STRIP PRINTED</span>
+            </div>
+            <!-- Dark Mechanical Slot Opening -->
+            <div class="w-full h-4 bg-black border border-stone-700 rounded-sm shadow-inner"></div>
+          </div>
+
+          <!-- Desk Mat Workspace where Strip & Stickers Live -->
+          <div id="stickerDeskStage" class="w-full min-h-[680px] bg-desk/60 border-2 border-t-0 border-espresso p-4 sm:p-8 flex flex-col items-center justify-start relative overflow-hidden">
+            
+            <!-- Hint Badge on Desk -->
+            <div class="w-full flex justify-between items-center font-mono text-[10px] text-espresso/50 mb-4 pointer-events-none">
+              <span>DESK SURFACE // DRAG STICKERS ANYWHERE</span>
+              <span>CLICK "FLIP TO BACK" FOR SECRET NOTE</span>
+            </div>
+
+            <!-- 3D FLIPPABLE PHOTO STRIP CONTAINER -->
+            <div id="stripPrintWrapper" class="perspective-1200 my-2 z-10">
+              <div id="stripFlipInner" class="preserve-3d relative w-[290px] sm:w-[330px]">
+                
+                <!-- FRONT OF LIFE4CUTS PHOTO STRIP -->
+                <div id="stripFront" class="backface-hidden bg-[#141413] text-white p-4 pb-6 shadow-strip border border-espresso/20 transition-colors duration-300">
+                  
+                  <!-- Top Strip Brand Header -->
+                  <div class="flex items-center justify-between border-b border-current/20 pb-2 mb-3 font-mono text-[10px] tracking-widest uppercase">
+                    <span>LIFE4CUTS // DHIMAHI</span>
+                    <span>2026.10</span>
+                  </div>
+
+                  <!-- Dynamic Photo Frames Container -->
+                  <div id="stripFramesContainer" class="grid grid-cols-1 gap-3">
+                    <!-- Populated dynamically by JS (4-cut or 6-cut) -->
+                  </div>
+
+                  <!-- Bottom Strip Signature Footer -->
+                  <div class="mt-4 pt-2 border-t border-current/20 flex items-end justify-between">
+                    <div>
+                      <div class="font-serif italic text-2xl leading-none">Happy Birthday, Dhimahi</div>
+                      <div class="font-mono text-[9px] opacity-75 uppercase mt-1">THE ULTIMATE OFFICE BESTIE ARCHIVE</div>
+                    </div>
+                    <!-- Mini QR-style Aesthetic Stamp -->
+                    <div class="font-mono text-[9px] border border-current px-1.5 py-0.5 uppercase font-bold">
+                      #01/01
+                    </div>
+                  </div>
+                </div>
+
+                <!-- BACK OF PHOTO PAPER (HANDWRITTEN PERSONAL NOTE) -->
+                <div id="stripBack" class="backface-hidden rotate-y-180 absolute inset-0 bg-[#FAF7F0] text-espresso p-6 shadow-strip border-2 border-espresso flex flex-col justify-between">
+                  
+                  <!-- Back of Photo Paper Watermarks -->
+                  <div class="flex justify-between items-center font-mono text-[10px] text-stone-400 border-b border-stone-200 pb-2">
+                    <span>FUJIFILM / KODAK ARCHIVAL PAPER</span>
+                    <span>BACKSIDE NOTE</span>
+                  </div>
+
+                  <!-- Handwritten Letter to Dhimahi -->
+                  <div class="my-auto py-4 space-y-3">
+                    <div class="inline-block bg-butter border border-espresso px-2 py-0.5 font-mono text-[10px] font-bold uppercase">
+                      DEAR DHIMAHI,
+                    </div>
+                    <p class="font-hand text-2xl sm:text-[26px] leading-snug text-espresso">
+                      Happy Birthday to the girl who single-handedly makes workdays 100x brighter! 
+                    </p>
+                    <p class="font-hand text-xl sm:text-2xl leading-snug text-espresso/90">
+                      Honestly, having you as both a colleague and my closest friend is the biggest win. From our telepathic side-eyes in meetings to our chaotic desk rants, peace signs, and nonstop laughs—you are genuinely one of a kind.
+                    </p>
+                    <p class="font-hand text-xl sm:text-2xl leading-snug text-espresso/90">
+                      May this year bring you massive success, zero annoying emails, endless peace, and all the happiness you deserve!
+                    </p>
+                    <div class="pt-3 text-right">
+                      <p class="font-hand text-2xl font-bold text-cherry">— Your Desk Partner-in-Crime 🥂</p>
+                    </div>
+                  </div>
+
+                  <!-- Flip Back Button -->
+                  <div class="border-t border-stone-300 pt-3 flex justify-between items-center">
+                    <span class="font-mono text-[10px] text-stone-400">STAMPED: AHMEDABAD HQ</span>
+                    <button onclick="flipPhotoStrip()" class="px-3 py-1 bg-espresso text-white font-mono text-[10px] font-bold uppercase hover:bg-cherry">
+                      ↩ FLIP TO PHOTOS
+                    </button>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Layer where Draggable Stickers Spawn -->
+            <div id="stickerLayer" class="absolute inset-0 pointer-events-none z-30"></div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===================================================
+         CHAPTER 03: RECEIPTIFY THERMAL BIRTHDAY RECEIPT
+    ==================================================== -->
+    <section id="chapter3" class="hidden w-full max-w-xl mx-auto flex flex-col items-center">
+      
+      <!-- Top Action Bar -->
+      <div class="w-full flex flex-wrap items-center justify-between gap-2 mb-6 bg-white border-2 border-espresso p-3 shadow-brutal">
+        <div>
+          <span class="font-mono text-[10px] uppercase text-cherry font-bold">THERMAL PRINTER #09</span>
+          <h2 class="font-serif italic text-3xl leading-none">Official Friendship Receipt</h2>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="appendReceiptCoupon()" id="addCouponBtn" class="px-3 py-2 bg-butter border-2 border-espresso font-mono text-xs font-bold uppercase shadow-brutal-sm hover:bg-cherry hover:text-white transition-colors">
+            + 🎟️ ADD TREAT COUPON
+          </button>
+        </div>
+      </div>
+
+      <!-- THE THERMAL PAPER RECEIPT -->
+      <div class="w-full max-w-[390px] relative filter drop-shadow-[0_18px_28px_rgba(24,22,21,0.22)]">
+        
+        <!-- Jagged Top Edge -->
+        <div class="w-full h-4 serrated-top"></div>
+
+        <!-- Receipt Body -->
+        <div class="thermal-texture px-6 py-6 font-mono text-espresso text-xs space-y-4 border-x border-stone-300">
+          
+          <!-- Store Header -->
+          <div class="text-center border-b-2 border-dashed border-espresso pb-4 space-y-1">
+            <div class="font-serif italic text-4xl tracking-tight font-bold">OFFICE BESTIE MART</div>
+            <div class="text-[11px] font-bold">AHMEDABAD HQ // DESK SECTOR 01</div>
+            <div class="text-[10px] text-espresso/70">TEL: 1-800-DHIMAHI-LEGEND</div>
+            <div class="pt-2 flex justify-between text-[10px] border-t border-espresso/20 mt-2">
+              <span>DATE: OCT 2026</span>
+              <span>ORDER: #BDAY-001</span>
+            </div>
+            <div class="flex justify-between text-[10px]">
+              <span>CUSTOMER: DHIMAHI</span>
+              <span>VIP TIER: PLATINUM</span>
+            </div>
+          </div>
+
+          <!-- Column Headers -->
+          <div class="flex justify-between font-bold text-[11px] border-b border-espresso pb-1">
+            <span>QTY  ITEM DESCRIPTION</span>
+            <span>AMOUNT</span>
+          </div>
+
+          <!-- Line Items -->
+          <div class="space-y-2.5 text-[11px] leading-tight" id="receiptItemsList">
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold">1000+</span> HRS SURVIVED TOGETHER AT DESK
+                <div class="text-[10px] text-espresso/60 pl-7">Daily sanity & comedy supply</div>
+              </div>
+              <span class="font-bold">₹0.00</span>
+            </div>
+
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold">108x</span> "HEAR ME OUT" HAND CHOREO
+                <div class="text-[10px] text-espresso/60 pl-7">Passionate storytelling</div>
+              </div>
+              <span class="font-bold">₹0.00</span>
+            </div>
+
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold">999x</span> TELEPATHIC MEETING SIDE-EYE
+                <div class="text-[10px] text-espresso/60 pl-7">Zero words needed</div>
+              </div>
+              <span class="font-bold">₹0.00</span>
+            </div>
+
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold">001x</span> ICONIC GLASSES SMIRK
+                <div class="text-[10px] text-espresso/60 pl-7">Certified main character</div>
+              </div>
+              <span class="font-bold">₹0.00</span>
+            </div>
+
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold">001x</span> UNHINGED TONGUE-OUT POSE
+                <div class="text-[10px] text-espresso/60 pl-7">Caught in 4K resolution</div>
+              </div>
+              <span class="font-bold">₹0.00</span>
+            </div>
+
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold">∞ x</span> RIDE-OR-DIE COLLEAGUE & FRIEND
+                <div class="text-[10px] text-espresso/60 pl-7">Irreplaceable desk duo</div>
+              </div>
+              <span class="font-bold bg-butter px-1 border border-espresso">PRICELESS</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Redeemable Coupon Slot (Hidden until clicked) -->
+          <div id="receiptCouponBox" class="hidden border-2 border-dashed border-cherry bg-butter/40 p-3 text-center space-y-1">
+            <div class="text-[10px] font-bold uppercase text-cherry">★ OFFICIAL BIRTHDAY VOUCHER ★</div>
+            <div class="font-serif italic text-2xl text-espresso">1x Free Coffee / Lunch / Treat</div>
+            <div class="text-[10px]">Sponsored by your favorite colleague. Valid anytime, zero questions asked!</div>
+            <div class="text-[9px] font-bold uppercase pt-1">CODE: QUEEN-DHIMAHI-2026</div>
+          </div>
+
+          <!-- Totals Section -->
+          <div class="border-t-2 border-dashed border-espresso pt-3 space-y-1 text-xs">
+            <div class="flex justify-between">
+              <span>SUBTOTAL</span>
+              <span>PRICELESS</span>
+            </div>
+            <div class="flex justify-between">
+              <span>WORK DRAMA TAX</span>
+              <span>-100% WAIVED</span>
+            </div>
+            <div class="flex justify-between font-bold text-sm pt-1 border-t border-espresso">
+              <span>TOTAL FRIENDSHIP RATING</span>
+              <span>10,000 / 10</span>
+            </div>
+          </div>
+
+          <!-- Mini Photo Thumbnail Stamp on Receipt -->
+          <div class="border border-espresso p-2 bg-white flex items-center gap-3">
+            <div id="receiptThumbSlot" class="w-14 h-14 border border-espresso shrink-0 overflow-hidden bg-stone-200"></div>
+            <div class="text-[10px] leading-snug">
+              <div class="font-bold uppercase">VERIFIED BIRTHDAY GIRL</div>
+              <div class="text-espresso/70">Keep this receipt as proof that you are the absolute best part of the office.</div>
+            </div>
+          </div>
+
+          <!-- Interactive Barcode Scanner -->
+          <div class="pt-3 text-center space-y-2">
+            <div onclick="scanReceiptBarcode()" class="cursor-pointer group py-2 px-3 bg-white border border-espresso hover:bg-butter transition-colors">
+              <!-- CSS Generated Barcode Bars -->
+              <div class="h-12 w-full flex items-stretch justify-center gap-[2px] overflow-hidden">
+                <div class="w-1 bg-espresso"></div><div class="w-0.5 bg-espresso"></div><div class="w-1.5 bg-espresso"></div><div class="w-0.5 bg-transparent"></div><div class="w-1 bg-espresso"></div><div class="w-2 bg-espresso"></div><div class="w-0.5 bg-espresso"></div><div class="w-1 bg-transparent"></div><div class="w-1.5 bg-espresso"></div><div class="w-0.5 bg-espresso"></div><div class="w-2 bg-espresso"></div><div class="w-0.5 bg-transparent"></div><div class="w-1 bg-espresso"></div><div class="w-1 bg-espresso"></div><div class="w-0.5 bg-espresso"></div><div class="w-2 bg-espresso"></div><div class="w-1 bg-transparent"></div><div class="w-0.5 bg-espresso"></div><div class="w-1.5 bg-espresso"></div><div class="w-1 bg-espresso"></div><div class="w-0.5 bg-espresso"></div><div class="w-2 bg-espresso"></div><div class="w-0.5 bg-espresso"></div><div class="w-1 bg-espresso"></div>
+              </div>
+              <div class="text-[10px] tracking-[0.25em] font-bold mt-1 group-hover:text-cherry">
+                *TAP BARCODE TO SCAN WISH*
+              </div>
+            </div>
+            <p id="barcodeScanStatus" class="text-[11px] font-bold text-cherry min-h-[16px]"></p>
+          </div>
+
+        </div>
+
+        <!-- Jagged Bottom Edge -->
+        <div class="w-full h-4 serrated-bottom"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       PHOTO STUDIO DRAWER (CRITICAL FOR ZERO-BROKEN-IMAGES
+       & INSTANT LIVE PREVIEW / PERMANENT BAKING)
+  ====================================================== -->
+  <div id="photoDrawerModal" class="fixed inset-0 z-50 hidden bg-espresso/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-desk border-4 border-espresso shadow-brutal-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-start justify-between border-b-2 border-espresso pb-3">
+        <div>
+          <span class="font-mono text-[10px] font-bold uppercase bg-cherry text-white px-2 py-0.5">ZERO-BROKEN-IMAGE ENGINE</span>
+          <h3 class="font-serif italic text-3xl mt-1">Photo Studio & Live Embedder</h3>
+        </div>
+        <button onclick="togglePhotoDrawer()" class="w-8 h-8 bg-espresso text-white font-mono font-bold">✕</button>
+      </div>
+
+      <p class="font-sans text-xs text-espresso/80 mt-3 leading-relaxed">
+        By default, the site points to your 6 filenames (<code class="bg-white px-1 border">IMG-20260824-WA0041.jpg</code>, etc.). 
+        <strong>Want to preview them right now in this window or send Dhimahi a single self-contained link with zero external image setup?</strong> 
+        Select your 6 photos below! They auto-match by filename or slot, save to your browser, and let you download a <strong>1-file ready-to-share HTML</strong> with the photos permanently embedded inside!
+      </p>
+
+      <!-- Batch Dropzone -->
+      <div class="mt-4">
+        <label class="flex flex-col items-center justify-center border-2 border-dashed border-espresso bg-butter/40 hover:bg-butter/70 p-5 cursor-pointer transition-colors text-center">
+          <span class="font-mono text-xs font-bold uppercase">📂 Click to Select All 6 Photos At Once</span>
+          <span class="font-mono text-[10px] text-espresso/70 mt-1">(Auto-matches IMG-20260824-WA0041, 170842175, 175303488, etc. or fills in order)</span>
+          <input type="file" multiple accept="image/*" class="hidden" onchange="handleBatchPhotoUpload(event)" />
+        </label>
+      </div>
+
+      <!-- Individual 6 Slots Preview Grid -->
+      <div id="drawerSlotsGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Export Single Self-Contained HTML Button -->
+      <div class="mt-6 pt-4 border-t-2 border-espresso flex flex-wrap items-center justify-between gap-3">
+        <button onclick="resetDefaultPhotos()" class="px-3 py-2 bg-white border-2 border-espresso font-mono text-xs font-bold uppercase hover:bg-stone-200">
+          Reset Default Paths
+        </button>
+        <div class="flex gap-2">
+          <button onclick="downloadBakedSingleFileHTML()" class="px-4 py-2 bg-cherry text-white border-2 border-espresso font-mono text-xs font-bold uppercase shadow-brutal-sm hover:bg-espresso transition-colors">
+            ⬇ Download Single HTML (With Photos Embedded!)
+          </button>
+          <button onclick="togglePhotoDrawer()" class="px-4 py-2 bg-espresso text-butter border-2 border-espresso font-mono text-xs font-bold uppercase">
+            Done
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="px-4 py-4 border-t-2 border-espresso bg-desk/90 text-center font-mono text-[11px] flex flex-wrap items-center justify-between max-w-5xl w-full mx-auto my-2">
+    <span>DESIGNED EXCLUSIVELY FOR DHIMAHI // VOL. 2026</span>
+    <div class="flex items-center gap-3">
+      <button onclick="attemptChapterSwitch(1)" class="underline hover:text-cherry">WRAPPED</button>
+      <span>•</span>
+      <button onclick="attemptChapterSwitch(2)" class="underline hover:text-cherry">PHOTOBOOTH</button>
+      <span>•</span>
+      <button onclick="attemptChapterSwitch(3)" class="underline hover:text-cherry">RECEIPT</button>
+    </div>
+  </footer>
+
+
+  <!-- =====================================================
+       APPLICATION LOGIC & WEB AUDIO SYNTHESIZER
+  ====================================================== -->
+  <script>
+    /* ==========================================================
+       1. PHOTO ARCHIVE DATA & SMART EDITORIAL FALLBACK ENGINE
+    ========================================================== */
+    const DEFAULT_PHOTOS = [
+      {
+        id: 'duo1',
+        filename: 'IMG-20260824-WA0041.jpg',
+        caption: 'PARTNERS IN CRIME 🤝',
+        sub: 'DESK HQ // THE UNSTOPPABLE DUO',
+        badge: 'FIG 01',
+        bg: '#FFE5EC',
+        accent: '#D92B4B',
+        svgIcon: '👩‍💻👨‍💻'
+      },
+      {
+        id: 'tongue',
+        filename: 'IMG_20260826_170842175.jpg',
+        caption: 'POST-MEETING SYNDROME 🤪',
+        sub: 'ZERO FILTER CERTIFIED // TONGUE OUT',
+        badge: 'FIG 02',
+        bg: '#FFF3B0',
+        accent: '#181615',
+        svgIcon: '😛✨'
+      },
+      {
+        id: 'glare',
+        filename: 'IMG_20260930_175308239.jpg',
+        caption: '5PM EXISTENTIAL THOUGHTS ☁️',
+        sub: 'CONTEMPLATING LIFE & DEADLINES',
+        badge: 'FIG 03',
+        bg: '#E0EAFC',
+        accent: '#1F4BFF',
+        svgIcon: '🙄💭'
+      },
+      {
+        id: 'glasses',
+        filename: 'IMG_20260826_170834487.jpg',
+        caption: 'FOCUSED GENIUS MODE 👓',
+        sub: 'CALM BEFORE THE GOSSIP STORM',
+        badge: 'FIG 04',
+        bg: '#E8F8F5',
+        accent: '#181615',
+        svgIcon: '🤓🌸'
+      },
+      {
+        id: 'hands',
+        filename: 'IMG_20260930_175316072.jpg',
+        caption: '"NOW HEAR ME OUT..." ✋',
+        sub: 'FULL HAND CHOREOGRAPHY EXPLANATION',
+        badge: 'FIG 05',
+        bg: '#FDEBD0',
+        accent: '#D92B4B',
+        svgIcon: '🗣️✋'
+      },
+      {
+        id: 'peace',
+        filename: 'IMG-20260824-WA0039.jpg',
+        caption: 'PEACE AMBASSADOR ✌️',
+        sub: 'COOL, COLLECTED & UNBOTHERED',
+        badge: 'FIG 06',
+        bg: '#EBDEF0',
+        accent: '#1F4BFF',
+        svgIcon: '✌️👑'
+      }
+    ];
+
+    // Load saved custom DataURLs if user uploaded them in browser
+    let customPhotoSources = {};
+    try {
+      const saved = localStorage.getItem('dhimahi_photos_2026');
+      if (saved) customPhotoSources = JSON.parse(saved);
+    } catch (e) {}
+
+    // Track which local files failed in sandboxed preview so we show high-fashion editorial cards instead of broken icons
+    let failedLocalFiles = {};
+
+    function getPhotoSrc(index) {
+      const item = DEFAULT_PHOTOS[index];
+      if (customPhotoSources[item.id]) return customPhotoSources[item.id];
+      return 'photos/' + item.filename;
+    }
+
+    function handleImgError(imgEl, index) {
+      const item = DEFAULT_PHOTOS[index];
+      failedLocalFiles[item.id] = true;
+      updatePhotoBadgeStatus();
+      const wrapper = imgEl.parentElement;
+      if (!wrapper) return;
+
+      wrapper.innerHTML = `
+        <div onclick="event.stopPropagation(); togglePhotoDrawer()" class="w-full h-full flex flex-col justify-between p-3 cursor-pointer select-none transition-transform hover:scale-[1.02]" style="background-color: ${item.bg}; color: #181615;">
+          <div class="flex items-center justify-between border-b border-espresso/20 pb-1 font-mono text-[9px] font-bold uppercase">
+            <span>${item.badge} // ${item.filename.slice(0, 14)}...</span>
+            <span class="bg-espresso text-butter px-1">LOAD PHOTO</span>
+          </div>
+          <div class="my-auto text-center py-1">
+            <div class="text-3xl mb-1">${item.svgIcon}</div>
+            <div class="font-serif italic text-lg leading-tight font-bold">${item.caption}</div>
+            <div class="font-mono text-[9px] opacity-75 mt-0.5">${item.sub}</div>
+          </div>
+          <div class="bg-white/80 border border-espresso px-2 py-1 text-center font-mono text-[9px] font-bold uppercase hover:bg-butter">
+            📸 Click to Drop Your 6 Photos Live
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSmartImage(index, extraClasses = "w-full h-full object-cover") {
+      const src = getPhotoSrc(index);
+      const item = DEFAULT_PHOTOS[index];
+      return `<img src="${src}" alt="${item.caption}" class="${extraClasses}" onerror="handleImgError(this, ${index})" />`;
+    }
+
+    function updatePhotoBadgeStatus() {
+      const badge = document.getElementById('photoStatusBadge');
+      if (!badge) return;
+      const customCount = Object.keys(customPhotoSources).length;
+      if (customCount >= 6) {
+        badge.className = 'w-2 h-2 rounded-full bg-emerald-500';
+      } else {
+        badge.className = 'w-2 h-2 rounded-full bg-cherry animate-ping';
+      }
+    }
+
+
+    /* ==========================================================
+       2. SYNTHESIZED SOUND ENGINE (CAMERA SHUTTER, PRINTER)
+    ========================================================== */
+    let audioCtx = null;
+    let soundMuted = false;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function toggleMute() {
+      soundMuted = !soundMuted;
+      const btn = document.getElementById('muteBtn');
+      btn.innerText = soundMuted ? '🔇 MUTED' : '🔊 SFX';
+    }
+
+    function playSFX(type) {
+      if (soundMuted) return;
+      try {
+        const ctx = initAudio();
+        const now = ctx.currentTime;
+
+        if (type === 'click') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(180, now + 0.045);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.05);
+
+        } else if (type === 'locked') {
+          [0, 0.14].forEach(offset => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(135, now + offset);
+            osc.frequency.setValueAtTime(110, now + offset + 0.05);
+            gain.gain.setValueAtTime(0.22, now + offset);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.11);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + offset);
+            osc.stop(now + offset + 0.12);
+          });
+
+        } else if (type === 'unlock') {
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+            gain.gain.setValueAtTime(0.2, now + idx * 0.07);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.25);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + idx * 0.07);
+            osc.stop(now + idx * 0.07 + 0.26);
+          });
+
+        } else if (type === 'shutter') {
+          const bufferSize = ctx.sampleRate * 0.08;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.025));
+          }
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+          const gain = ctx.createGain();
+          gain.gain.setValueAtTime(0.45, now);
+          noise.connect(gain);
+          gain.connect(ctx.destination);
+          noise.start(now);
+
+        } else if (type === 'printer') {
+          for (let i = 0; i < 12; i++) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(140 + (i % 2) * 35, now + i * 0.13);
+            gain.gain.setValueAtTime(0.08, now + i * 0.13);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.13 + 0.08);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + i * 0.13);
+            osc.stop(now + i * 0.13 + 0.09);
+          }
+
+        } else if (type === 'beep') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(2150, now);
+          gain.gain.setValueAtTime(0.22, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.15);
+
+        } else if (type === 'stamp') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(160, now);
+          osc.frequency.exponentialRampToValueAtTime(55, now + 0.12);
+          gain.gain.setValueAtTime(0.4, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.14);
+        }
+      } catch (e) {}
+    }
+
+
+    /* ==========================================================
+       3. SPOTIFY JUKEBOX SWITCHER
+    ========================================================== */
+    const BOLLYWOOD_TRACKS = [
+      {
+        title: 'Jaane Kyun — Dostana',
+        label: '● NOW LOADED: JAANE KYUN (DOSTANA)',
+        // Official Spotify embed track URI for Jaane Kyun
+        embedUrl: 'https://open.spotify.com/embed/track/6M2UnI1LnXuXlWU54CKmKx?utm_source=generator&theme=0'
+      },
+      {
+        title: 'Iktara — Wake Up Sid',
+        label: '● NOW LOADED: IKTARA (WAKE UP SID)',
+        // Official Spotify embed track URI for Iktara
+        embedUrl: 'https://open.spotify.com/embed/track/0bmp0lE3ArELHqda9PBMVG?utm_source=generator&theme=0'
+      },
+      {
+        title: 'Tumse Milke Dil Ka — Main Hoon Na',
+        label: '● NOW LOADED: TUMSE MILKE DIL KA (MAIN HOON NA)',
+        // Official Spotify embed track URI for Tumse Milke Dil Ka
+        embedUrl: 'https://open.spotify.com/embed/track/1ax8ZuwRVkSdzzsIqyCNWQ?utm_source=generator&theme=0'
+      }
+    ];
+
+    function switchSpotifyTrack(trackIndex) {
+      playSFX('click');
+      const track = BOLLYWOOD_TRACKS[trackIndex];
+      const iframe = document.getElementById('spotifyIframe');
+      const label = document.getElementById('nowPlayingLabel');
+
+      if (iframe) iframe.src = track.embedUrl;
+      if (label) label.innerText = track.label;
+
+      // Update card styles
+      [0, 1, 2].forEach(idx => {
+        const card = document.getElementById(`songCard-${idx}`);
+        if (!card) return;
+        if (idx === trackIndex) {
+          card.className = 'cursor-pointer bg-espresso text-butter p-2 border-2 border-espresso shadow-brutal-sm transition-all flex items-center justify-between gap-2';
+          card.querySelector('span').innerText = 'ACTIVE ▶';
+        } else {
+          card.className = 'cursor-pointer bg-white hover:bg-butter/60 p-2 border border-espresso shadow-brutal-sm transition-all flex items-center justify-between gap-2';
+          card.querySelector('span').innerText = 'PLAY ♫';
+        }
+      });
+
+      showEditorialToast(`🎵 Loaded "${track.title}" on Spotify!`);
+    }
+
+
+    /* ==========================================================
+       4. PROGRESSIVE STORY-GATED CHAPTER NAVIGATION
+    ========================================================== */
+    let activeChapter = 1;
+    let isLife4CutsUnlocked = false;
+    let isReceiptUnlocked = false;
+
+    function unlockChapter2() {
+      if (!isLife4CutsUnlocked) {
+        isLife4CutsUnlocked = true;
+        const lockIcon2 = document.getElementById('lockIconCh2');
+        if (lockIcon2) lockIcon2.innerText = '🔓';
+        updateNavbarVisualState();
+      }
+    }
+
+    function unlockChapter3() {
+      if (!isReceiptUnlocked) {
+        isReceiptUnlocked = true;
+        const lockIcon3 = document.getElementById('lockIconCh3');
+        if (lockIcon3) lockIcon3.innerText = '🔓';
+        updateNavbarVisualState();
+      }
+    }
+
+    function updateNavbarVisualState() {
+      const nav1 = document.getElementById('navCh1');
+      const nav2 = document.getElementById('navCh2');
+      const nav3 = document.getElementById('navCh3');
+
+      nav1.className = (activeChapter === 1)
+        ? 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all bg-espresso text-butter'
+        : 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all text-espresso hover:bg-butter/40';
+
+      if (!isLife4CutsUnlocked) {
+        nav2.className = 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all text-espresso/45 bg-stone-100 cursor-not-allowed flex items-center justify-center gap-1';
+      } else {
+        nav2.className = (activeChapter === 2)
+          ? 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all bg-espresso text-butter flex items-center justify-center gap-1'
+          : 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all text-espresso hover:bg-butter/40 flex items-center justify-center gap-1';
+      }
+
+      if (!isReceiptUnlocked) {
+        nav3.className = 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all text-espresso/45 bg-stone-100 cursor-not-allowed flex items-center justify-center gap-1';
+      } else {
+        nav3.className = (activeChapter === 3)
+          ? 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all bg-espresso text-butter flex items-center justify-center gap-1'
+          : 'flex-1 sm:flex-initial px-3 py-1.5 font-mono text-[11px] sm:text-xs font-bold uppercase transition-all text-espresso hover:bg-butter/40 flex items-center justify-center gap-1';
+      }
+    }
+
+    function attemptChapterSwitch(ch) {
+      if (ch === 2 && !isLife4CutsUnlocked) {
+        playSFX('locked');
+        const btn2 = document.getElementById('navCh2');
+        btn2.classList.remove('animate-shake');
+        void btn2.offsetWidth;
+        btn2.classList.add('animate-shake');
+        showEditorialToast('🔒 NO SPOILERS! Finish all 5 slides of "01. WRAPPED" first to unlock the Life4Cuts Booth!');
+        return;
+      }
+
+      if (ch === 3 && !isReceiptUnlocked) {
+        playSFX('locked');
+        const btn3 = document.getElementById('navCh3');
+        btn3.classList.remove('animate-shake');
+        void btn3.offsetWidth;
+        btn3.classList.add('animate-shake');
+        const msg = !isLife4CutsUnlocked
+          ? '🔒 LOCKED! Complete "01. WRAPPED" and print your "02. LIFE4CUTS" strip first!'
+          : '🔒 LOCKED! Check out your "02. LIFE4CUTS" photo strip first before printing your Receipt!';
+        showEditorialToast(msg);
+        return;
+      }
+
+      switchChapter(ch);
+    }
+
+    function switchChapter(ch) {
+      playSFX('click');
+      activeChapter = ch;
+
+      [1, 2, 3].forEach(num => {
+        const sec = document.getElementById(`chapter${num}`);
+        if (num === ch) {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      });
+
+      updateNavbarVisualState();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function unlockAndGoToReceipt() {
+      unlockChapter3();
+      playSFX('unlock');
+      switchChapter(3);
+    }
+
+
+    /* ==========================================================
+       5. CHAPTER 01: WRAPPED STORY SLIDES LOGIC
+    ========================================================== */
+    let currentSlide = 0;
+    const totalSlides = 5;
+
+    const MOOD_ARCHETYPES = [
+      {
+        photoIndex: 1,
+        tag: 'ARCHETYPE #01 // 170842175.JPG',
+        title: 'The Post-Meeting Tongue-Out 🤪',
+        desc: 'When another 45-minute call could have literally been a 2-line message.'
+      },
+      {
+        photoIndex: 2,
+        tag: 'ARCHETYPE #02 // 175303488.JPG',
+        title: '5PM Existential Contemplation ☁️',
+        desc: 'Calculating why computers exist, where the weekend went, and what to eat next.'
+      },
+      {
+        photoIndex: 4,
+        tag: 'ARCHETYPE #03 // 175316072.JPG',
+        title: '"Now Hear Me Out..." ✋',
+        desc: 'Full hand choreography deployed while explaining the master plan at the desk.'
+      },
+      {
+        photoIndex: 5,
+        tag: 'ARCHETYPE #04 // WA0039.JPG',
+        title: 'Certified Peace Ambassador ✌️',
+        desc: 'Unbothered, stylish, and keeping it 100% chill while chaos unfolds.'
+      }
+    ];
+
+    function updateStoryUI() {
+      for (let i = 0; i < totalSlides; i++) {
+        const slideEl = document.getElementById(`story-slide-${i}`);
+        const progEl = document.getElementById(`prog-${i}`);
+        if (i === currentSlide) {
+          slideEl.classList.remove('hidden');
+          progEl.style.width = '100%';
+        } else {
+          slideEl.classList.add('hidden');
+          progEl.style.width = i < currentSlide ? '100%' : '0%';
+        }
+      }
+      document.getElementById('storySlideCounter').innerText = `0${currentSlide + 1} / 0${totalSlides}`;
+
+      if (currentSlide === totalSlides - 1 && !isLife4CutsUnlocked) {
+        unlockChapter2();
+        playSFX('unlock');
+        showEditorialToast('🔓 UNLOCKED! You can now enter the Life4Cuts Photobooth!');
+      }
+    }
+
+    function nextStorySlide() {
+      playSFX('click');
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateStoryUI();
+      } else {
+        launchPhotoboothFromStory();
+      }
+    }
+
+    function prevStorySlide() {
+      playSFX('click');
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateStoryUI();
+      }
+    }
+
+    function selectMood(idx) {
+      playSFX('click');
+      const m = MOOD_ARCHETYPES[idx];
+      document.getElementById('moodPhotoFrame').innerHTML = renderSmartImage(m.photoIndex);
+      document.getElementById('moodTag').innerText = m.tag;
+      document.getElementById('moodTitle').innerText = m.title;
+      document.getElementById('moodDesc').innerText = m.desc;
+
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`moodBtn-${i}`);
+        if (i === idx) {
+          btn.className = 'px-2.5 py-2 font-mono text-[11px] font-bold uppercase border-2 border-espresso bg-espresso text-butter text-left truncate';
+        } else {
+          btn.className = 'px-2.5 py-2 font-mono text-[11px] font-bold uppercase border-2 border-espresso bg-white text-espresso hover:bg-butter/40 text-left truncate';
+        }
+      }
+    }
+
+    function stampCover() {
+      playSFX('stamp');
+      triggerEditorialConfetti();
+      const btn = document.getElementById('coverStampBtn');
+      btn.innerText = '✓ CERTIFIED OFFICE LEGEND';
+      btn.className = 'px-3 py-1.5 bg-butter text-espresso font-mono text-xs font-bold uppercase border border-desk shadow-[3px_3px_0px_#D92B4B]';
+    }
+
+    function launchPhotoboothFromStory() {
+      unlockChapter2();
+      unlockChapter3();
+      triggerCameraFlash();
+      playSFX('shutter');
+      setTimeout(() => {
+        switchChapter(2);
+        dispensePhotoStrip();
+      }, 280);
+    }
+
+
+    /* ==========================================================
+       6. CHAPTER 02: LIFE4CUTS PHOTOBOOTH & STICKER DESK
+    ========================================================== */
+    let stripTheme = 'black';
+    let stripLayout = '4cut';
+    let isStripFlipped = false;
+
+    const THEME_STYLES = {
+      black:  { bg: '#141413', text: '#FAF8F5' },
+      cream:  { bg: '#F5F0E6', text: '#181615' },
+      cherry: { bg: '#C8233C', text: '#FAF8F5' },
+      cobalt: { bg: '#1D3557', text: '#FAF8F5' }
+    };
+
+    function setStripTheme(theme) {
+      playSFX('click');
+      stripTheme = theme;
+      const front = document.getElementById('stripFront');
+      const style = THEME_STYLES[theme];
+      front.style.backgroundColor = style.bg;
+      front.style.color = style.text;
+
+      ['black', 'cream', 'cherry', 'cobalt'].forEach(t => {
+        const btn = document.getElementById(`theme-${t}`);
+        btn.style.outline = (t === theme) ? '3px solid #F4E06D' : 'none';
+      });
+    }
+
+    function setStripLayout(layout) {
+      playSFX('click');
+      stripLayout = layout;
+      const btn4 = document.getElementById('layout-4cut');
+      const btn6 = document.getElementById('layout-6cut');
+
+      if (layout === '4cut') {
+        btn4.className = 'py-2 px-3 font-mono text-xs font-bold uppercase border-2 border-butter bg-butter text-espresso';
+        btn6.className = 'py-2 px-3 font-mono text-xs font-bold uppercase border-2 border-desk/40 bg-transparent text-desk hover:border-butter';
+      } else {
+        btn6.className = 'py-2 px-3 font-mono text-xs font-bold uppercase border-2 border-butter bg-butter text-espresso';
+        btn4.className = 'py-2 px-3 font-mono text-xs font-bold uppercase border-2 border-desk/40 bg-transparent text-desk hover:border-butter';
+      }
+      renderPhotoboothStripFrames();
+    }
+
+    function renderPhotoboothStripFrames() {
+      const container = document.getElementById('stripFramesContainer');
+      if (!container) return;
+
+      if (stripLayout === '4cut') {
+        container.className = 'grid grid-cols-1 gap-3';
+        const indices = [0, 1, 3, 5];
+        container.innerHTML = indices.map((photoIdx, cutNum) => `
+          <div class="relative bg-stone-900 aspect-[4/3] overflow-hidden border border-current/25 group">
+            ${renderSmartImage(photoIdx)}
+            <div class="absolute bottom-1 right-1.5 bg-black/65 text-white font-mono text-[9px] px-1.5 py-0.5 uppercase">
+              CUT 0${cutNum + 1} // ${DEFAULT_PHOTOS[photoIdx].caption.slice(0, 18)}
+            </div>
+          </div>
+        `).join('');
+      } else {
+        container.className = 'grid grid-cols-2 gap-2.5';
+        const indices = [0, 1, 2, 3, 4, 5];
+        container.innerHTML = indices.map((photoIdx, cutNum) => `
+          <div class="relative bg-stone-900 aspect-[3/4] overflow-hidden border border-current/25">
+            ${renderSmartImage(photoIdx)}
+            <div class="absolute bottom-1 inset-x-1 bg-black/70 text-white font-mono text-[8px] px-1 py-0.5 truncate text-center">
+              0${cutNum + 1}. ${DEFAULT_PHOTOS[photoIdx].caption}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function triggerCameraFlash() {
+      const flash = document.getElementById('cameraFlash');
+      flash.classList.remove('flash-active');
+      void flash.offsetWidth;
+      flash.classList.add('flash-active');
+    }
+
+    function dispensePhotoStrip() {
+      if (isStripFlipped) flipPhotoStrip();
+      triggerCameraFlash();
+      playSFX('shutter');
+      setTimeout(() => playSFX('printer'), 200);
+
+      const wrapper = document.getElementById('stripPrintWrapper');
+      const statusText = document.getElementById('printerStatusText');
+      statusText.innerText = '● PRINTING KEEP-SAKE...';
+
+      wrapper.classList.remove('animate-print');
+      void wrapper.offsetWidth;
+      wrapper.classList.add('animate-print');
+
+      setTimeout(() => {
+        statusText.innerText = '● PRINT COMPLETE!';
+        triggerEditorialConfetti();
+      }, 1850);
+    }
+
+    function flipPhotoStrip() {
+      playSFX('click');
+      isStripFlipped = !isStripFlipped;
+      const inner = document.getElementById('stripFlipInner');
+      const btn = document.getElementById('flipStripBtn');
+      if (isStripFlipped) {
+        inner.classList.add('rotate-y-180');
+        btn.innerHTML = '<span>🔄 FLIP TO PHOTOS</span>';
+      } else {
+        inner.classList.remove('rotate-y-180');
+        btn.innerHTML = '<span>🔄 FLIP TO BACK</span>';
+      }
+    }
+
+
+    /* ==========================================================
+       7. DRAGGABLE STICKER DESK ENGINE
+    ========================================================== */
+    function spawnSticker(text, classes) {
+      playSFX('click');
+      const layer = document.getElementById('stickerLayer');
+      const stage = document.getElementById('stickerDeskStage');
+      const sticker = document.createElement('div');
+
+      sticker.className = `draggable-sticker pointer-events-auto absolute whitespace-nowrap ${classes}`;
+      sticker.innerText = text;
+
+      const stageRect = stage.getBoundingClientRect();
+      const randX = Math.max(20, Math.min(stageRect.width - 180, (stageRect.width / 2 - 70) + (Math.random() * 160 - 80)));
+      const randY = Math.max(40, Math.min(stageRect.height - 80, 120 + Math.random() * 340));
+
+      sticker.style.left = `${randX}px`;
+      sticker.style.top = `${randY}px`;
+
+      sticker.addEventListener('dblclick', () => {
+        playSFX('click');
+        sticker.remove();
+      });
+
+      makeElementDraggable(sticker, stage);
+      layer.appendChild(sticker);
+    }
+
+    function makeElementDraggable(el, container) {
+      let startX = 0, startY = 0, initialLeft = 0, initialTop = 0;
+
+      const onPointerDown = (e) => {
+        e.stopPropagation();
+        playSFX('click');
+        el.style.zIndex = Date.now() % 10000 + 40;
+        startX = e.clientX;
+        startY = e.clientY;
+        initialLeft = parseFloat(el.style.left) || 0;
+        initialTop = parseFloat(el.style.top) || 0;
+
+        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointerup', onPointerUp);
+      };
+
+      const onPointerMove = (e) => {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const rect = container.getBoundingClientRect();
+        const nextLeft = Math.max(0, Math.min(rect.width - el.offsetWidth, initialLeft + dx));
+        const nextTop = Math.max(0, Math.min(rect.height - el.offsetHeight, initialTop + dy));
+        el.style.left = `${nextLeft}px`;
+        el.style.top = `${nextTop}px`;
+      };
+
+      const onPointerUp = () => {
+        window.removeEventListener('pointermove', onPointerMove);
+        window.removeEventListener('pointerup', onPointerUp);
+      };
+
+      el.addEventListener('pointerdown', onPointerDown);
+    }
+
+    function clearAllStickers() {
+      playSFX('click');
+      document.getElementById('stickerLayer').innerHTML = '';
+    }
+
+
+    /* ==========================================================
+       8. CHAPTER 03: RECEIPTIFY COUPON & BARCODE SCANNER
+    ========================================================== */
+    function appendReceiptCoupon() {
+      playSFX('printer');
+      const box = document.getElementById('receiptCouponBox');
+      const btn = document.getElementById('addCouponBtn');
+      box.classList.remove('hidden');
+      btn.innerText = '✓ VOUCHER PRINTED';
+      btn.className = 'px-3 py-2 bg-espresso text-butter border-2 border-espresso font-mono text-xs font-bold uppercase';
+      triggerEditorialConfetti();
+    }
+
+    function scanReceiptBarcode() {
+      playSFX('beep');
+      triggerEditorialConfetti();
+      const status = document.getElementById('barcodeScanStatus');
+      status.innerText = 'BEEP! ✓ 100% ICONIC BESTIE VERIFIED — HAPPY BIRTHDAY DHIMAHI!';
+    }
+
+
+    /* ==========================================================
+       9. PHOTO STUDIO DRAWER & 1-CLICK SINGLE-FILE EXPORTER
+    ========================================================== */
+    function togglePhotoDrawer() {
+      playSFX('click');
+      const modal = document.getElementById('photoDrawerModal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) {
+        renderDrawerSlots();
+      }
+    }
+
+    function renderDrawerSlots() {
+      const grid = document.getElementById('drawerSlotsGrid');
+      grid.innerHTML = DEFAULT_PHOTOS.map((item, idx) => `
+        <div class="bg-white border-2 border-espresso p-2 flex flex-col justify-between">
+          <div class="font-mono text-[9px] font-bold truncate mb-1">${idx + 1}. ${item.filename}</div>
+          <div class="w-full h-24 bg-stone-100 border border-espresso overflow-hidden mb-2">
+            ${renderSmartImage(idx)}
+          </div>
+          <label class="block text-center py-1 bg-butter border border-espresso font-mono text-[10px] font-bold uppercase cursor-pointer hover:bg-cherry hover:text-white">
+            Swap Photo
+            <input type="file" accept="image/*" class="hidden" onchange="handleSingleSlotUpload(event, ${idx})" />
+          </label>
+        </div>
+      `).join('');
+    }
+
+    function compressImageFileToDataURL(file, callback) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const maxDim = 900;
+          let w = img.width, h = img.height;
+          if (w > h && w > maxDim) {
+            h = Math.round((h * maxDim) / w);
+            w = maxDim;
+          } else if (h > maxDim) {
+            w = Math.round((w * maxDim) / h);
+            h = maxDim;
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          callback(canvas.toDataURL('image/jpeg', 0.82));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleSingleSlotUpload(event, idx) {
+      const file = event.target.files[0];
+      if (!file) return;
+      compressImageFileToDataURL(file, (dataUrl) => {
+        const item = DEFAULT_PHOTOS[idx];
+        customPhotoSources[item.id] = dataUrl;
+        delete failedLocalFiles[item.id];
+        saveAndRefreshPhotos();
+      });
+    }
+
+    function handleBatchPhotoUpload(event) {
+      const files = Array.from(event.target.files);
+      if (!files.length) return;
+
+      let processed = 0;
+      files.slice(0, 6).forEach((file, i) => {
+        compressImageFileToDataURL(file, (dataUrl) => {
+          const matchedItem = DEFAULT_PHOTOS.find(p => file.name.includes(p.filename.replace('.jpg', ''))) || DEFAULT_PHOTOS[i];
+          if (matchedItem) {
+            customPhotoSources[matchedItem.id] = dataUrl;
+            delete failedLocalFiles[matchedItem.id];
+          }
+          processed++;
+          if (processed === Math.min(files.length, 6)) {
+            saveAndRefreshPhotos();
+            showEditorialToast('📸 All photos loaded & embedded live!');
+          }
+        });
+      });
+    }
+
+    function saveAndRefreshPhotos() {
+      try {
+        localStorage.setItem('dhimahi_photos_2026', JSON.stringify(customPhotoSources));
+      } catch (e) {}
+      refreshAllPhotoSlots();
+      renderDrawerSlots();
+      updatePhotoBadgeStatus();
+    }
+
+    function resetDefaultPhotos() {
+      customPhotoSources = {};
+      localStorage.removeItem('dhimahi_photos_2026');
+      refreshAllPhotoSlots();
+      renderDrawerSlots();
+      updatePhotoBadgeStatus();
+    }
+
+    function downloadBakedSingleFileHTML() {
+      playSFX('click');
+      let htmlSource = document.documentElement.outerHTML;
+      const injectedScript = `let customPhotoSources = ${JSON.stringify(customPhotoSources)};`;
+      htmlSource = htmlSource.replace(/let customPhotoSources = \{\};/, injectedScript);
+
+      const blob = new Blob(['<!DOCTYPE html>\n' + htmlSource], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'happy-birthday-dhimahi-2026.html';
+      a.click();
+      URL.revokeObjectURL(url);
+      showEditorialToast('⬇ Single self-contained HTML downloaded!');
+    }
+
+
+    /* ==========================================================
+       10. CONFETTI, TOAST & INITIALIZATION
+    ========================================================== */
+    function triggerEditorialConfetti() {
+      if (typeof confetti !== 'function') return;
+      confetti({
+        particleCount: 65,
+        spread: 70,
+        origin: { y: 0.65 },
+        colors: ['#181615', '#D92B4B', '#F4E06D', '#1F4BFF', '#FAF8F5'],
+        shapes: ['square']
+      });
+    }
+
+    function showEditorialToast(text) {
+      const existing = document.getElementById('editorialToast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'editorialToast';
+      toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-espresso text-butter border-2 border-butter px-4 py-2.5 font-mono text-xs font-bold shadow-brutal max-w-md w-[90%] text-center';
+      toast.innerText = text;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3400);
+    }
+
+    function refreshAllPhotoSlots() {
+      document.getElementById('coverPhotoSlot').innerHTML = renderSmartImage(3);
+      document.getElementById('duoFinaleSlot').innerHTML = renderSmartImage(0);
+      document.getElementById('receiptThumbSlot').innerHTML = renderSmartImage(5);
+      selectMood(0);
+      renderPhotoboothStripFrames();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      refreshAllPhotoSlots();
+      updateStoryUI();
+      updatePhotoBadgeStatus();
+
+      setTimeout(() => {
+        spawnSticker('👑 BIRTHDAY QUEEN', 'bg-butter text-espresso border-2 border-espresso font-mono text-xs font-bold px-2.5 py-1 shadow-brutal-sm rotate-[-6deg]');
+      }, 400);
+    });
+  </script>
+</body>
+</html>
