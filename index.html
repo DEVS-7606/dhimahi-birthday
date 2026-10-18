@@ -1050,10 +1050,10 @@
       `;
     }
 
-    function renderSmartImage(index, extraClasses = "w-full h-full object-cover") {
+    function renderSmartImage(index, extraClasses = "w-full h-full object-cover", extraStyle = "") {
       const src = getPhotoSrc(index);
       const item = DEFAULT_PHOTOS[index];
-      return `<img src="${src}" alt="${item.caption}" class="${extraClasses}" onerror="handleImgError(this, ${index})" />`;
+      return `<img src="${src}" alt="${item.caption}" class="${extraClasses}" style="${extraStyle}" onerror="handleImgError(this, ${index})" />`;
     }
 
     function updatePhotoBadgeStatus() {
@@ -1807,7 +1807,7 @@
     }
 
     function refreshAllPhotoSlots() {
-      document.getElementById('coverPhotoSlot').innerHTML = renderSmartImage(3, 'w-full h-full object-cover object-[50%_42%]');
+      document.getElementById('coverPhotoSlot').innerHTML = renderSmartImage(3, 'w-full h-full object-cover', 'object-position:50% 42%');
       document.getElementById('duoFinaleSlot').innerHTML = renderSmartImage(0, 'w-full h-full object-contain');
       document.getElementById('receiptThumbSlot').innerHTML = renderSmartImage(5, 'w-full h-full object-cover object-top');
       selectMood(0);
