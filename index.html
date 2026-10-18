@@ -216,7 +216,7 @@
 
       <!-- Utility Controls: Photo Drawer & Audio Toggle -->
       <div class="flex items-center gap-1.5 order-2 sm:order-3">
-        <button onclick="togglePhotoDrawer()" class="px-2.5 py-1 bg-butter border-2 border-espresso font-mono text-[11px] font-bold uppercase shadow-brutal-sm hover:bg-cherry hover:text-white transition-colors flex items-center gap-1" title="Load or customize photos so zero broken images appear">
+        <button id="photoUploadBtn" onclick="togglePhotoDrawer()" class="hidden px-2.5 py-1 bg-butter border-2 border-espresso font-mono text-[11px] font-bold uppercase shadow-brutal-sm hover:bg-cherry hover:text-white transition-colors flex items-center gap-1" title="Load or customize photos so zero broken images appear">
           <span>📸</span>
           <span class="hidden md:inline">Photos</span>
           <span id="photoStatusBadge" class="w-2 h-2 rounded-full bg-cherry"></span>
@@ -1690,7 +1690,25 @@
     /* ==========================================================
        9. PHOTO STUDIO DRAWER & 1-CLICK SINGLE-FILE EXPORTER
     ========================================================== */
+    /* Feature flags: open the site with ?flag=photo-upload to reveal the photo upload drawer
+       (remembered in this browser). Use ?flag=off to switch all flags back off. */
+    const FEATURE_FLAGS = (() => {
+      let flags = [];
+      try { flags = JSON.parse(localStorage.getItem('dhimahi_flags') || '[]'); } catch (e) {}
+      const fromUrl = new URLSearchParams(location.search).get('flag');
+      if (fromUrl === 'off') flags = [];
+      else if (fromUrl) flags = [...new Set([...flags, ...fromUrl.split(',').map(f => f.trim()).filter(Boolean)])];
+      try { localStorage.setItem('dhimahi_flags', JSON.stringify(flags)); } catch (e) {}
+      return flags;
+    })();
+    const hasFlag = name => FEATURE_FLAGS.includes(name);
+    if (hasFlag('photo-upload')) {
+      document.getElementById('photoUploadBtn').classList.remove('hidden');
+      document.getElementById('photoUploadBtn').classList.add('flex');
+    }
+
     function togglePhotoDrawer() {
+      if (!hasFlag('photo-upload')) return;
       playSFX('click');
       const modal = document.getElementById('photoDrawerModal');
       modal.classList.toggle('hidden');
