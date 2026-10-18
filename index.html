@@ -505,7 +505,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         <!-- LEFT COLUMN: PHOTOBOOTH DISPENSER CONSOLE & STICKER TRAY (5 cols) -->
-        <div class="lg:col-span-5 space-y-5">
+        <div id="boothLeftCol" class="lg:col-span-5 space-y-5">
           
           <!-- Machine Header Box -->
           <div class="bg-espresso text-desk border-2 border-espresso p-5 shadow-brutal">
@@ -611,7 +611,7 @@
         </div>
 
         <!-- RIGHT COLUMN: DISPENSER SLOT + INTERACTIVE DOT-GRID DESK (7 cols) -->
-        <div class="lg:col-span-7 flex flex-col items-center">
+        <div id="boothRightCol" class="lg:col-span-7 flex flex-col items-center scroll-mt-24">
           
           <!-- Physical Photobooth Dispenser Slot Bar -->
           <div class="w-full max-w-md bg-espresso p-3 border-2 border-espresso shadow-brutal z-20 relative">
@@ -1337,7 +1337,32 @@
 
       updateNavbarVisualState();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (ch === 2 && isMobileView()) {
+        // Mobile: jump past the customization panel straight to the printed strip
+        setTimeout(() => scrollToBooth('boothRightCol'), 350);
+      }
+      updateBoothArrow();
     }
+
+    /* Mobile helpers: auto-scroll to the strip + floating "back to customize" arrow */
+    function isMobileView() { return window.innerWidth < 1024; }
+
+    function scrollToBooth(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 12;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    function updateBoothArrow() {
+      const btn = document.getElementById('boothUpArrow');
+      const right = document.getElementById('boothRightCol');
+      if (!btn || !right) return;
+      const show = activeChapter === 2 && isMobileView() && right.getBoundingClientRect().top < window.innerHeight * 0.5;
+      btn.classList.toggle('hidden', !show);
+    }
+    window.addEventListener('scroll', updateBoothArrow, { passive: true });
+    window.addEventListener('resize', updateBoothArrow);
 
     function unlockAndGoToReceipt() {
       unlockChapter3();
@@ -1824,5 +1849,9 @@
       }, 400);
     });
   </script>
+  <button id="boothUpArrow" onclick="playSFX('click'); scrollToBooth('boothLeftCol')" class="hidden fixed bottom-4 right-4 z-50 flex flex-col items-center bg-butter text-espresso border-2 border-espresso shadow-brutal-sm px-3 py-2 font-mono text-[10px] font-bold uppercase leading-tight" aria-label="Back to customization">
+    <span class="text-lg leading-none">↑</span>
+    <span>Customize</span>
+  </button>
 </body>
 </html>
