@@ -611,7 +611,7 @@
         </div>
 
         <!-- RIGHT COLUMN: DISPENSER SLOT + INTERACTIVE DOT-GRID DESK (7 cols) -->
-        <div id="boothRightCol" class="lg:col-span-7 flex flex-col items-center scroll-mt-24">
+        <div id="boothRightCol" class="lg:col-span-7 flex flex-col items-center">
           
           <!-- Physical Photobooth Dispenser Slot Bar -->
           <div class="w-full max-w-md bg-espresso p-3 border-2 border-espresso shadow-brutal z-20 relative">
@@ -1350,7 +1350,9 @@
     function scrollToBooth(id) {
       const el = document.getElementById(id);
       if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - 12;
+      const header = document.querySelector('header');
+      const headerH = header ? header.getBoundingClientRect().height : 0; // sticky header covers content otherwise
+      const top = el.getBoundingClientRect().top + window.scrollY - headerH - 12;
       window.scrollTo({ top, behavior: 'smooth' });
     }
 
