@@ -1807,7 +1807,7 @@
     }
 
     function refreshAllPhotoSlots() {
-      document.getElementById('coverPhotoSlot').innerHTML = renderSmartImage(3, 'w-full h-full object-cover object-top');
+      document.getElementById('coverPhotoSlot').innerHTML = renderSmartImage(3, 'w-full h-full object-cover object-[50%_42%]');
       document.getElementById('duoFinaleSlot').innerHTML = renderSmartImage(0, 'w-full h-full object-contain');
       document.getElementById('receiptThumbSlot').innerHTML = renderSmartImage(5, 'w-full h-full object-cover object-top');
       selectMood(0);
